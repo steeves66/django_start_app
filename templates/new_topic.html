@@ -1,0 +1,108 @@
+
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+{% load tailwind_filters %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+    Topic Page
+{% endblock title %}
+
+{% block breadcrumbs %}
+    <li class="flex items-center ml-1">
+        <a href="{% url 'home' %}" class="font-bold">Boards</a>
+        <span class="ml-2">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+        </span>
+    </li>
+    <li class="flex items-center ml-1">
+        <a href="{% url 'board_topics' board.id %}" class="font-bold">{{ board.name }}</a>
+        <span class="ml-2">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+        </span>
+    </li>
+    <li class="flex items-center ml-1">
+        <a href="#" class="font-bold text-gray-500">New Topic</a>
+    </li>
+{% endblock breadcrumbs %}
+
+{% block content %}
+<!--    <form action="" method="post">
+        {% csrf_token %}
+        <div>
+            <label for="id_subject" class="block mb-2 text-sm text-gray-600">Subject</label>
+            <input type="text" class="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300" id="id_subject" name="subject">
+        </div>
+        <div>
+            <label for="id_message" class="block mt-4 mb-2 text-sm text-gray-600">Message</label>
+            <textarea type="text" class="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300" id="id_message" name="message" rows="5"></textarea>
+        </div>
+        <button type="submit" class="inline-flex items-center mt-2 px-6 py-2 text-sm text-white bg-green-600 rounded hover:bg-green-700">Post</button>
+    </form>-->
+
+<!--    <form method="post" novalidate>
+        {% csrf_token %}
+        {% crispy form%}
+        <input type="submit" class="py-1 px-3 my-4 bg-green-500 text-white font-medium rounded hover:bg-indigo-500 cursor-pointer ease-in-out duration-300" value="Post">
+    </form>-->
+
+<!--    <form method="post" novalidate>
+        {% csrf_token %}
+&lt;!&ndash;        {% crispy form%}&ndash;&gt;
+        {% for field in form %}
+            <div class="block mb-2 text-sm text-gray-600">
+                {{ field.label_tag }}
+                {% render_field field class="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300" %}
+                {% if field.help_text %}
+                    <small class="text-xs">
+                        {{ field.help_text }}
+                    </small>
+                {% endif %}
+            </div>
+        {% endfor %}
+        <button type="submit" class="inline-flex items-center mt-2 px-6 py-2 text-sm text-white bg-green-600 rounded hover:bg-green-700">Post</button>
+    </form>-->
+
+<!--    <form method="post" novalidate>
+        {% csrf_token %}
+
+        {%for field in form %}
+            <div class="">
+                {{ field.label_tag }}
+
+                {% if form.is_bound %}
+                    {% if field_errors %}
+                        {% render_field field class="border-2 border-red-700" %}
+                        {% for error in field.errors %}
+                            <div class="inline-flex text-sm text-red-700">
+                                {{ error }}
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        {% render_field field class="border-4 border-blue-700" %}
+                    {% endif %}
+                {% else %}
+                    {% render_field field class="border-4 border-blue-700" %}
+                {% endif %}
+
+                {% if field.help_text %}
+                    <small class="text-xs">
+                        {{ field.help_text }}
+                    </small>
+                {% endif %}
+            </div>
+        {% endfor %}
+
+        <button type="submit" class="inline-flex items-center mt-2 px-6 py-2 text-sm text-white bg-green-600 rounded hover:bg-green-700">Post</button>
+    </form>-->
+
+  <form method="post" novalidate>
+    {% csrf_token %}
+    {% include 'includes/form.html' %}
+    <button type="submit" class="inline-flex items-center mt-2 px-6 py-1 text-sm text-white bg-green-600 rounded hover:bg-green-700">Post</button>
+  </form>
+{% endblock content %}

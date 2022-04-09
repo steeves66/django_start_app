@@ -1,0 +1,44 @@
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    Boards Page
+{% endblock title %}
+
+{% block breadcrumbs %}
+    <li class="flex items-center ml-1">
+        <a href="{% url 'home' %}" class="font-bold">Boards</a>
+        <!-- <span class="ml-2">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+        </span> -->
+    </li>
+{% endblock breadcrumbs %}
+
+{% block content %}
+    <table class="w-full">
+        <thead class="bg-gray-800 text-white h-12">
+            <tr class="">
+                <th class="text-left pl-2">Board</th>
+                <th>Posts</th>
+                <th>Topics</th>
+                <th>Last Post</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for board in boards %}
+            <tr  class="border-b border-gray-400 h-20">
+                <td class="pl-2">
+                    <a href="{% url 'board_topics' board.id %}" class="text-blue-900 font-bold">{{ board.name }}</a>  <br>
+                    <small class="text-gray-700">{{ board.description }}</small>
+                </td>
+                <td class="border-b border-gray-400 text-center">0</td>
+                <td class="border-b border-gray-400 text-center">0</td>
+                <td class="border-b border-gray-400 text-center">0</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock content %}

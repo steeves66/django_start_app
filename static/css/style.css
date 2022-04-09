@@ -1,0 +1,62 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Peralta&display=swap');
+
+/* Root */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+/* BODY */
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    animation: FadeIn 1.5s;
+    background-image: url("../img/more-leaves-on-green.png";
+}
+
+.header_title {
+    font-family: 'Peralta', serif ;
+}
+
+/* Animation's on BODY */
+@keyframes FadeIn {
+    0% { opacity: 0;}
+    100% { opacity: 1;}
+}
+
+/* NAV LINK */
+.nav_link {
+    color: #6b7280;
+}
+
+/* NAV LINK HOVER */
+.nav_link:hover {
+    color: #f59e08;
+}
+
+/* NAV LINK ACTIVE */
+.nav_link.active{
+    color: black;
+    background-color: #f59e0b;
+    border-radius: 7px;
+    width: fit-content;
+    padding: 5px;
+    text-align: center;
+}
+
+/* SCROLLBAR CUSTOM */
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #f59e08;
+}
