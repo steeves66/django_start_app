@@ -36,5 +36,12 @@ urlpatterns = [
     # acounts
     path('signup/', accounts_view.signup, name='signup'),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
-    path('login/', auth_views.LoginView.as_view(template_name='login.html'), name='login')
+    path('login/', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
+
+    # reset password
+    path('reset/', auth_views.PasswordResetView.as_view(
+        template_name='password_reset_html',
+        email_template_name='password_reset_email.html',
+        subject_template_name='password_reset_subject.txt'
+    ), name='password_reset'),
 ]
