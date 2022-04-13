@@ -14,6 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
+from django.template.defaulttags import url
 from django.urls import path
 
 from login import views
@@ -31,17 +32,35 @@ urlpatterns = [
     path('', v_board.home, name='home'),
     path('boards/<int:board_id>/', v_board.board_topics, name='board_topics'),
     path('boards/<int:board_id>/new', v_board.new_topic, name='new_topic'),
-    path('test/', index),
+    path('boards/<int:pk>/topics/<int:topic_pk>/', v_board.topic_posts, name='topic_posts'),
 
     # acounts
     path('signup/', accounts_view.signup, name='signup'),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
     path('login/', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
 
+
+
+
     # reset password
-    path('reset/', auth_views.PasswordResetView.as_view(
-        template_name='password_reset_html',
-        email_template_name='password_reset_email.html',
-        subject_template_name='password_reset_subject.txt'
-    ), name='password_reset'),
+    # path('reset/', auth_views.PasswordResetView.as_view(
+    #     template_name='password_reset_html',
+    #     email_template_name='password_reset_email.html',
+    #     subject_template_name='password_reset_subject.txt'
+    # ), name='password_reset'),
+    # path('reset/done/', auth_views.PasswordResetDoneView.as_view(template_name='password-reset_done')),
+    # path('reset/done/', auth_views.PasswordResetDoneView.as_view(template_name='password-reset_done')),
+
+    # reset password
+    path('reset_password/', auth_views.PasswordResetView.as_view(template_name='password_reset.html',
+                                                                 email_template_name='password_reset_email.html',
+                                                                 subject_template_name='password_reset_subject.txt'), name='reset_password'),
+    path('reset_password_send/', auth_views.PasswordResetDoneView.as_view(template_name='password_reset_sent.html'), name='password_reset_done'),
+    path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(template_name='password_reset_form.html'), name='password_reset_confirm'),
+    path('reset_password_complete/', auth_views.PasswordResetCompleteView.as_view(template_name='password_reset_done.html'), name='password_reset_complete'),
+
+    # changed password once user is log in
+    path('settings/password/', auth_views.PasswordChangeView.as_view(template_name='password_change.html'), name='password_change'),
+    path('settings/password/done', auth_views.PasswordChangeDoneView.as_view(template_name='password_change_done.html'), name='password_change_done'),
+
 ]

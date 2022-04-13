@@ -8,7 +8,9 @@
 
 {% block content %}
 <div class="p-4 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md sm:p-6 lg:p-8 dark:bg-gray-800 dark:border-gray-700">
-    <form class="space-y-6" action="#">
+    <form class="space-y-6" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="next" value="{{ next }}">
         <h5 class="text-xl font-medium text-gray-900 dark:text-white">Login</h5>
         {% include 'includes/form.html' %}
         <button type="submit" class="w-full items-center mt-2 px-6 py-2 text-sm text-white bg-blue-600 rounded hover:bg-blue-700">Login</button>
@@ -17,7 +19,7 @@
         </div>
         <div>
             <small>
-                <a href="javascript:void(0)">Forgot your password</a>
+                <a href="{% url 'reset_password' %}">Forgot your password</a>
             </small>
         </div>
     </form>
