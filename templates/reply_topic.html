@@ -1,0 +1,62 @@
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    test
+{% endblock title %}
+
+{% block breadcrumbs %}
+    <li class="flex items-center ml-1">
+        <a href="{% url 'home' %}" class="font-bold">Boards</a>
+        <span class="ml-2">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+        </span>
+    </li>
+    <li class="flex items-center ml-1">
+        <a href="{% url 'board_topics' topic.board.pk %}" class="font-bold">{{ topic.board.name }}</a>
+        <span class="ml-2">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+        </span>
+    </li>
+    <li class="flex items-center ml-1">
+        <a href="{% url 'topic_posts' topic.board.pk  topic.pk%}" class="font-bold">{{ topic.subject }}</a>
+        <span class="ml-2">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+        </span>
+    </li>
+    <li class="flex items-center ml-1">
+        <a href="#" class="font-bold text-gray-500">Post a reply</a>
+    </li>
+{% endblock breadcrumbs %}
+
+{% block content %}
+    <form method="post" novalidate>
+        {% csrf_token %}
+        {% include 'includes/form.html' %}
+        <button type="submit" class="text-white bg-blue-600 font-medium rounded-lg text-sm px-6 mt-2 py-1 ">Reply a post</button>
+    </form>
+
+    <div class="mt-4">
+        {% for post in topic.posts.all %}
+        <div class="container mx-auto px-4 border">
+            <div class="">
+                <ul class="flex flex-row justify-between">
+                    <li class="py-2"> <strong>{{ post.created_by.username }}</strong> </li>
+                    <li> <small class="text-gray-700">{{ post.created_at }}</small> </li>
+                </ul>
+            </div>
+            <div class="mt-4">
+                {{ post.message }}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+{% endblock content %}

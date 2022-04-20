@@ -9,3 +9,7 @@ from django.http import HttpResponse
 
 def home(request):
     return render(request, 'base.html')
+
+
+class PostUpdateView:
+    pass

@@ -34,9 +34,23 @@
                     <a href="{% url 'board_topics' board.id %}" class="text-blue-900 font-bold">{{ board.name }}</a>  <br>
                     <small class="text-gray-700">{{ board.description }}</small>
                 </td>
-                <td class="border-b border-gray-400 text-center">0</td>
-                <td class="border-b border-gray-400 text-center">0</td>
-                <td class="border-b border-gray-400 text-center">0</td>
+                <td class="border-b border-gray-400 text-center">{{ board.topics.count }}</td>
+                <td class="border-b border-gray-400 text-center">{{ board.get_posts_count }}</td>
+                <td class="border-b border-gray-400 text-center">
+                    {% with post=board.get_last_post %}
+                        {% if post %}
+                            <small>
+                                <a href="{% url 'topic_posts' board.id post.topic.pk %}">
+                                    By {{ post.created_by.username }} at {{ post.created_at }}
+                                </a>
+                            </small>
+                         {% else %}
+                            <small>
+                                <em>No posts yet.</em>
+                            </small>
+                        {% endif %}
+                    {% endwith %}
+                </td>
             </tr>
             {% endfor %}
         </tbody>

@@ -34,12 +34,12 @@
         </tr>
     </thead>
     <tbody>
-        {% for topic in board.topics.all %}
-        <tr  class="border-b border-gray-400 h-20">
-            <td class="pl-2">{{ topic.subject }}</td>
+        {% for topic in topics %}
+        <tr class="border-b border-gray-400 h-20">
+            <td class="pl-2"><a href="{% url 'topic_posts' board.id topic.id %}" class="text-blue-900 font-bold">{{ topic.subject }}</a> </td>
             <td class="border-b border-gray-400 text-center">{{ topic.starter.username }}</td>
-            <td class="border-b border-gray-400 text-center">0</td>
-            <td class="border-b border-gray-400 text-center">0</td>
+            <td class="border-b border-gray-400 text-center">{{ topic.replies }}</td>
+            <td class="border-b border-gray-400 text-center">{{ topic.views }}</td>
             <td class="border-b border-gray-400 text-center">{{ topic.last_updated }}</td>
         </tr>
         {% endfor %}

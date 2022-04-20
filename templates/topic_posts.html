@@ -29,9 +29,42 @@
 {% endblock breadcrumbs %}
 
 {% block content %}
-    <button type="submit" class="text-white bg-blue-600 font-medium rounded-lg text-sm px-6 mt-2 py-1 ">Reply</button>
+    <div class="px-6 mt-2 py-1 font-medium rounded-sm text-xl text-blue border-blue-800">
+        <a href="{% url 'reply_topic' topic.board.pk topic.id %}" class="">
+            Reply
+        </a>
+    </div>
 
     {% for post in topic.posts.all %}
-
+    <div class="container mx-auto px-4 mb-4 border">
+        <div class="flex flex-row">
+            <div class="">
+                <img class="mt-2" src="{% static 'img/403022_business man_male_user_avatar_profile_icon.png' %}" alt="{{ post.created_by.username }}">
+                <div class="text-center">
+                    <small>Posts: {{ post.created_by.posts.count }} </small>
+                </div>
+            </div>
+            <div class="flex-1">
+                <div class="flex flex-col h-full ml-4">
+                    <div class="">
+                        <ul class="flex flex-row justify-between">
+                            <li class="py-2"> <strong>{{ post.created_by.username }}</strong> </li>
+                            <li> <small class="text-gray-700">{{ post.created_at }}</small> </li>
+                        </ul>
+                    </div>
+                    <p class="flex-1 mt-4">{{ post.message }}</p>
+                    {% if post.created_by == user %}
+                        <div>
+                            <a href="{% url 'edit_post' post.topic.board.pk post.topic.pk post.pk %}" >
+                                <button type="button" class="hover:bg-blue-800 hover:text-white bg-blue-700 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2">
+                                    Edit
+                                </button>
+                            </a>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
     {% endfor%}
 {% endblock content %}
